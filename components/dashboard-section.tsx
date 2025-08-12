@@ -1,101 +1,29 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { BookOpen, FileText, FolderOpen, Users, Plus, Bell, BellRing } from "lucide-react"
+import { BookOpen, FileText, FolderOpen, Users, Bell, BellRing } from "lucide-react"
 
 interface DashboardSectionProps {
   userData: { email: string; profileImage: string; isAdmin: boolean }
 }
 
-interface Publication {
-  id: string
-  title: string
-  content: string
-  date: string
-  author: string
-}
-
 export default function DashboardSection({ userData }: DashboardSectionProps) {
-  const [publications, setPublications] = useState<Publication[]>([])
-  const [newTitle, setNewTitle] = useState("")
-  const [newContent, setNewContent] = useState("")
-  const [showPublishForm, setShowPublishForm] = useState(false)
   const [vitrineAlert, setVitrineAlert] = useState(false)
 
   useEffect(() => {
-    const savedPublications = localStorage.getItem("schoolPublications")
     const savedVitrineAlert = localStorage.getItem("vitrineAlert")
-
-    if (savedPublications) {
-      setPublications(JSON.parse(savedPublications))
-    } else {
-      // Publicações padrão se não houver nenhuma salva
-      const defaultPublications = [
-        {
-          id: "1",
-          title: "Novos materiais de Matemática",
-          content: "Foram adicionados novos exercícios para a 10ª classe",
-          date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-          author: "Sistema",
-        },
-        {
-          id: "2",
-          title: "Exames de Física disponíveis",
-          content: "Provas anteriores de Física da 12ª classe foram atualizadas",
-          date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-          author: "Sistema",
-        },
-      ]
-      setPublications(defaultPublications)
-      localStorage.setItem("schoolPublications", JSON.stringify(defaultPublications))
-    }
-
     if (savedVitrineAlert === "true") {
       setVitrineAlert(true)
     }
   }, [])
 
-  const handlePublish = () => {
-    if (!newTitle.trim() || !newContent.trim()) return
-
-    const newPublication: Publication = {
-      id: Date.now().toString(),
-      title: newTitle,
-      content: newContent,
-      date: new Date().toISOString(),
-      author: userData.email.split("@")[0],
-    }
-
-    const updatedPublications = [newPublication, ...publications]
-    setPublications(updatedPublications)
-    localStorage.setItem("schoolPublications", JSON.stringify(updatedPublications))
-
-    setNewTitle("")
-    setNewContent("")
-    setShowPublishForm(false)
-  }
-
   const toggleVitrineAlert = () => {
     const newAlertState = !vitrineAlert
     setVitrineAlert(newAlertState)
     localStorage.setItem("vitrineAlert", newAlertState.toString())
-  }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    const now = new Date()
-    const diffTime = Math.abs(now.getTime() - date.getTime())
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-    if (diffDays === 1) return "Há 1 dia"
-    if (diffDays < 7) return `Há ${diffDays} dias`
-    if (diffDays < 14) return "Há 1 semana"
-    return `Há ${Math.ceil(diffDays / 7)} semanas`
   }
 
   return (
@@ -120,36 +48,9 @@ export default function DashboardSection({ userData }: DashboardSectionProps) {
               {vitrineAlert ? <BellRing className="w-4 h-4" /> : <Bell className="w-4 h-4" />}
               Alerta Vitrine
             </Button>
-            <Button onClick={() => setShowPublishForm(!showPublishForm)} size="sm" className="flex items-center gap-2">
-              <Plus className="w-4 h-4" />
-              Nova Publicação
-            </Button>
           </div>
         )}
       </div>
-
-      {userData.isAdmin && showPublishForm && (
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Nova Publicação</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Input placeholder="Título da publicação" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
-            <Textarea
-              placeholder="Conteúdo da publicação"
-              value={newContent}
-              onChange={(e) => setNewContent(e.target.value)}
-              rows={3}
-            />
-            <div className="flex gap-2">
-              <Button onClick={handlePublish}>Publicar</Button>
-              <Button variant="outline" onClick={() => setShowPublishForm(false)}>
-                Cancelar
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Card>
@@ -197,21 +98,29 @@ export default function DashboardSection({ userData }: DashboardSectionProps) {
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle>Publicações Recentes</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {publications.map((publication) => (
-              <div key={publication.id} className="border-l-4 border-blue-500 pl-4">
-                <h4 className="font-semibold">{publication.title}</h4>
-                <p className="text-sm text-gray-600">{publication.content}</p>
-                <div className="flex justify-between items-center mt-1">
-                  <span className="text-xs text-gray-500">{formatDate(publication.date)}</span>
-                  <span className="text-xs text-gray-500">Por: {publication.author}</span>
-                </div>
-              </div>
-            ))}
+        <CardContent className="p-0">
+          <div className="relative overflow-hidden rounded-b-lg">
+            <iframe
+              src="https://docs.google.com/document/d/1fH1QU5mneyOLZ3tKsy7Bat_UT0cpWdf4DG14QekrXF0/edit?usp=sharing"
+              width="100%"
+              height="800"
+              className="border-0"
+              title="Publicações da Escola"
+              style={{
+                marginTop: "-60px",
+                marginLeft: "-20px",
+                marginRight: "-20px",
+                width: "calc(100% + 40px)",
+                height: "860px",
+              }}
+            />
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to bottom, white 0px, transparent 60px, transparent calc(100% - 60px), white 100%)",
+              }}
+            />
           </div>
         </CardContent>
       </Card>

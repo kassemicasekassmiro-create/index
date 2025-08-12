@@ -88,8 +88,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
         }
       }
     } else {
-      if (username && email && password && confirmPassword && profileImage) {
-        // verificando se email foi preenchido
+      if (username && email && password && confirmPassword) {
         if (password !== confirmPassword) {
           alert("As senhas não coincidem!")
           return
@@ -101,9 +100,10 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
         }
 
         const isAdmin = username === "administradorstarlink1@esgl"
-        saveUser(username, email, password, profileImage, isAdmin) // passando email para saveUser
+        const finalProfileImage = profileImage || "/generic-user-avatar.png"
+        saveUser(username, email, password, finalProfileImage, isAdmin)
 
-        const userData = { username, email, profileImage, isAdmin } // incluindo email nos dados do usuário
+        const userData = { username, email, profileImage: finalProfileImage, isAdmin }
         localStorage.setItem("schoolUserData", JSON.stringify(userData))
         onLogin(userData)
       }
@@ -191,7 +191,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
 
             {!isLogin && (
               <div>
-                <Label htmlFor="profileImage">Foto de Perfil</Label>
+                <Label htmlFor="profileImage">Foto de Perfil (Opcional)</Label>
                 <div className="mt-2">
                   <input
                     id="profileImage"
@@ -213,7 +213,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
                     ) : (
                       <>
                         <Upload className="w-8 h-8 text-gray-400" />
-                        <p className="text-sm text-gray-500">Clique para enviar foto</p>
+                        <p className="text-sm text-gray-500">Clique para enviar foto (opcional)</p>
                       </>
                     )}
                   </label>
@@ -224,9 +224,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
             <Button
               type="submit"
               className="w-full"
-              disabled={
-                isLogin ? !username || !password : !username || !email || !password || !confirmPassword || !profileImage
-              } // incluindo email na validação
+              disabled={isLogin ? !username || !password : !username || !email || !password || !confirmPassword}
             >
               {isLogin ? "Entrar" : "Criar Conta"}
             </Button>

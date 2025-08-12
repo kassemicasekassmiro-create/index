@@ -7,6 +7,7 @@ import DashboardSection from "@/components/dashboard-section"
 import VitrineSection from "@/components/vitrine-section"
 import LivrosSection from "@/components/livros-section"
 import ReclamacoesSection from "@/components/reclamacoes-section"
+import Footer from "@/components/footer"
 
 interface UserData {
   username: string
@@ -87,14 +88,15 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header
         userData={userData!}
         currentSection={currentSection}
         onSectionChange={setCurrentSection}
         onLogout={handleLogout}
       />
-      {renderCurrentSection()}
+      <main className="flex-1">{renderCurrentSection()}</main>
+      <Footer />
     </div>
   )
 }

@@ -5,11 +5,8 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Textarea } from "@/components/ui/textarea"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
-import { MessageSquare, Send, Trash2 } from "lucide-react"
+import { MessageSquare, Trash2 } from "lucide-react"
 
 interface Reclamacao {
   id: string
@@ -95,80 +92,30 @@ export default function ReclamacoesSection({ userData }: ReclamacoesSectionProps
         <p className="text-gray-600">
           {userData.isAdmin
             ? `Gerencie as reclamações dos usuários. ${reclamacoesNovas > 0 ? `${reclamacoesNovas} nova(s) reclamação(ões)` : "Nenhuma reclamação nova"}`
-            : "Envie sua reclamação ou sugestão para o administrador"}
+            : "Envie sua reclamação ou sugestão através do formulário abaixo"}
         </p>
       </div>
 
       {!userData.isAdmin ? (
-        // Formulário para usuários normais
-        <Card className="max-w-2xl">
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MessageSquare className="w-5 h-5" />
-              Nova Reclamação
+              Formulário de Reclamações
             </CardTitle>
             <CardDescription>Preencha o formulário abaixo para enviar sua reclamação ou sugestão</CardDescription>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={enviarReclamacao} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="nome">Nome Completo</Label>
-                  <Input
-                    id="nome"
-                    value={novaReclamacao.nome}
-                    onChange={(e) => setNovaReclamacao({ ...novaReclamacao, nome: e.target.value })}
-                    placeholder="Seu nome completo"
-                    required
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={novaReclamacao.email}
-                    onChange={(e) => setNovaReclamacao({ ...novaReclamacao, email: e.target.value })}
-                    placeholder="seu@email.com"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor="assunto">Assunto</Label>
-                <Input
-                  id="assunto"
-                  value={novaReclamacao.assunto}
-                  onChange={(e) => setNovaReclamacao({ ...novaReclamacao, assunto: e.target.value })}
-                  placeholder="Resumo da sua reclamação"
-                  required
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="mensagem">Mensagem</Label>
-                <Textarea
-                  id="mensagem"
-                  value={novaReclamacao.mensagem}
-                  onChange={(e) => setNovaReclamacao({ ...novaReclamacao, mensagem: e.target.value })}
-                  placeholder="Descreva detalhadamente sua reclamação ou sugestão..."
-                  rows={5}
-                  required
-                />
-              </div>
-
-              <Button type="submit" disabled={enviando} className="w-full">
-                {enviando ? (
-                  "Enviando..."
-                ) : (
-                  <>
-                    <Send className="w-4 h-4 mr-2" />
-                    Enviar Reclamação
-                  </>
-                )}
-              </Button>
-            </form>
+          <CardContent className="p-0">
+            <div className="relative w-full" style={{ paddingBottom: "75%", height: 0 }}>
+              <iframe
+                src="https://docs.google.com/forms/d/e/1FAIpQLSf7pBxGF4Pcu9H5uxRv919YaK0IWfohjzNc6jSVKLYuHs8rvQ/viewform?embedded=true"
+                className="absolute top-0 left-0 w-full h-full border-0 rounded-b-lg"
+                title="Formulário de Reclamações"
+                allowFullScreen
+              >
+                Carregando…
+              </iframe>
+            </div>
           </CardContent>
         </Card>
       ) : (
