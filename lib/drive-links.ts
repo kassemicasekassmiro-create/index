@@ -10,7 +10,7 @@ export const driveLinks = {
     Inglês: "https://drive.google.com/embeddedfolderview?id=1f0Ur2aRkcJLUreyInf9OL6Nzilij6-qj#grid",
     Matemática: "https://drive.google.com/embeddedfolderview?id=142J3A4WaKhJrdXGHLa_S64wGCJ-OYvh6#grid",
     Química: "https://drive.google.com/embeddedfolderview?id=1oXViKXWsmNLMA8LTjn5M36coZA3eb7xW#grid",
-    "TIC'S": "https://drive.google.com/embeddedfolderview?id=1U0FIeYsGbcTN44Y-OLPFciiNxUJSlX1l#grid",
+    "lingua portuguesa": "https://drive.google.com/embeddedfolderview?id=1U0FIeYsGbcTN44Y-OLPFciiNxUJSlX1l#grid",
   },
   "8": {
     Agropecuária: "https://drive.google.com/embeddedfolderview?id=1L4SlK7PqGblqqSM9ARIZfw8WZYOdNoG5#grid",

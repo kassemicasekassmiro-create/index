@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 text-center">
         <p className="text-base md:text-sm leading-relaxed">
           Alunos da Escola Secundária Geral de Lugela - Principal criador{" "}
-          <span className="font-semibold">Jesuel Fernando</span> e{" "}
+          <span className="font-semibold">Jesuel Fernando,Mino Armando,Kleiton </span> e{" "}
           <span className="font-semibold text-blue-600">v0</span>
         </p>
       </div>

@@ -113,18 +113,18 @@ export default function DashboardSection({ userData }: DashboardSectionProps) {
               className="border-0 sm:h-[800px]"
               title="Publicações da Escola"
               style={{
-                marginTop: "-40px",
+                marginTop: "-80px",
                 marginLeft: "-10px",
                 marginRight: "-10px",
                 width: "calc(100% + 20px)",
-                height: "640px",
+                height: "680px",
               }}
             />
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "linear-gradient(to bottom, white 0px, transparent 40px, transparent calc(100% - 40px), white 100%)",
+                  "linear-gradient(to bottom, white 0px, transparent 80px, transparent calc(100% - 40px), white 100%)",
               }}
             />
           </div>
