@@ -7,12 +7,15 @@ import DashboardSection from "@/components/dashboard-section"
 import VitrineSection from "@/components/vitrine-section"
 import LivrosSection from "@/components/livros-section"
 import ReclamacoesSection from "@/components/reclamacoes-section"
+import ProfileSection from "@/components/profile-section"
 import Footer from "@/components/footer"
 
 interface UserData {
   username: string
+  email?: string
   profileImage: string
   isAdmin: boolean
+  description?: string
 }
 
 export default function Home() {
@@ -55,6 +58,10 @@ export default function Home() {
     setCurrentSection("dashboard")
   }
 
+  const handleUpdateProfile = (updatedData: UserData) => {
+    setUserData(updatedData)
+  }
+
   const renderCurrentSection = () => {
     if (!userData) return null
 
@@ -67,6 +74,8 @@ export default function Home() {
         return <LivrosSection />
       case "reclamacoes":
         return <ReclamacoesSection userData={userData} />
+      case "perfil":
+        return <ProfileSection userData={userData} onUpdateProfile={handleUpdateProfile} />
       default:
         return <DashboardSection userData={userData} />
     }
