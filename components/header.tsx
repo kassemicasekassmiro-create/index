@@ -188,20 +188,36 @@ export default function Header({ userData, currentSection, onSectionChange, onLo
 
           <div className="flex items-center space-x-2 sm:space-x-4">
             <div className="hidden sm:flex items-center space-x-2">
-              <img
-                src={userData.profileImage || "/placeholder.svg"}
-                alt="Profile"
-                className="w-8 h-8 rounded-full object-cover"
-              />
+              <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-100">
+                <img
+                  src={userData.profileImage || "/generic-user-avatar.png"}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                  crossOrigin="anonymous"
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.src = "/generic-user-avatar.png"
+                  }}
+                />
+              </div>
               <span className="text-sm text-gray-700 max-w-24 truncate">{userData.username}</span>
             </div>
 
             <div className="sm:hidden">
-              <img
-                src={userData.profileImage || "/placeholder.svg"}
-                alt="Profile"
-                className="w-8 h-8 rounded-full object-cover"
-              />
+              <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-100">
+                <img
+                  src={userData.profileImage || "/generic-user-avatar.png"}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                  crossOrigin="anonymous"
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.src = "/generic-user-avatar.png"
+                  }}
+                />
+              </div>
             </div>
 
             <Button variant="ghost" size="sm" onClick={onLogout}>
@@ -265,11 +281,19 @@ export default function Header({ userData, currentSection, onSectionChange, onLo
 
               <div className="pt-2 border-t mt-2">
                 <div className="flex items-center space-x-2 px-3 py-2">
-                  <img
-                    src={userData.profileImage || "/placeholder.svg"}
-                    alt="Profile"
-                    className="w-6 h-6 rounded-full object-cover"
-                  />
+                  <div className="w-6 h-6 rounded-full overflow-hidden bg-gray-100">
+                    <img
+                      src={userData.profileImage || "/generic-user-avatar.png"}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                      crossOrigin="anonymous"
+                      loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.src = "/generic-user-avatar.png"
+                      }}
+                    />
+                  </div>
                   <span className="text-sm text-gray-700">{userData.username}</span>
                 </div>
               </div>
