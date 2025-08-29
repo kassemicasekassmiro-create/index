@@ -35,18 +35,12 @@ export default function DashboardSection({ userData, onSectionChange }: Dashboar
             <div className="flex items-center gap-3">
               <button
                 onClick={() => onSectionChange?.("perfil")}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gray-200 flex-shrink-0 hover:border-blue-400 transition-colors cursor-pointer bg-gray-100"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gray-200 flex-shrink-0 hover:border-blue-400 transition-colors cursor-pointer"
               >
                 <img
                   src={userData.profileImage || "/generic-user-avatar.png"}
                   alt="Foto de perfil"
                   className="w-full h-full object-cover"
-                  crossOrigin="anonymous"
-                  loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement
-                    target.src = "/generic-user-avatar.png"
-                  }}
                 />
               </button>
               <span>Bem-vindo, {userData.email.split("@")[0]}!</span>

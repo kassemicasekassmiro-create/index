@@ -93,19 +93,11 @@ export default function ProfileSection({ userData, onUpdateProfile }: ProfileSec
           </CardHeader>
           <CardContent className="text-center">
             <div className="mb-4">
-              <div className="w-32 h-32 rounded-full mx-auto border-4 border-gray-200 overflow-hidden bg-gray-100">
-                <img
-                  src={imagePreview || "/generic-user-avatar.png"}
-                  alt="Foto de perfil"
-                  className="w-full h-full object-cover"
-                  crossOrigin="anonymous"
-                  loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement
-                    target.src = "/generic-user-avatar.png"
-                  }}
-                />
-              </div>
+              <img
+                src={imagePreview || "/placeholder.svg"}
+                alt="Foto de perfil"
+                className="w-32 h-32 rounded-full object-cover mx-auto border-4 border-gray-200"
+              />
             </div>
             <input
               id="profileImageUpload"
