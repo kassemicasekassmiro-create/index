@@ -94,11 +94,11 @@ export const driveLinks = {
 }
 
 // Link da vitrine - SUBSTITUA ESTE LINK PELO SEU DRIVE DA VITRINE
-export const vitrineLink = "https://drive.google.com/embeddedfolderview?id=1-7D3Q7R9Tw1Hk6pp_laEgW6tXSoON0bZ#grid"
+export const vitrineLink = "https://drive.google.com/embeddedfolderview?id=1-7D3Q7R9Tw1Hk6pp_laEgW6tXSoON0bZ#list"
 
 // Links dos exames por classe - SUBSTITUA ESTES LINKS PELOS SEUS DRIVES DE EXAMES
 export const examLinks = {
-  "9": "https://drive.google.com/embeddedfolderview?id=1ZVtieYjSPFx-vckgzyq1gAdz17B5LbxQ#grid",
-  "10": "https://drive.google.com/embeddedfolderview?id=1gXHubdt9bCoYL-87vmoqOaJx7uZ5ydWa#grid",
-  "12": "https://drive.google.com/embeddedfolderview?id=1cjVVcpOefx7jlzZiZ7qxkHBjmS11qYEg#grid",
+  "9": "https://drive.google.com/embeddedfolderview?id=1ZVtieYjSPFx-vckgzyq1gAdz17B5LbxQ#list",
+  "10": "https://drive.google.com/embeddedfolderview?id=1gXHubdt9bCoYL-87vmoqOaJx7uZ5ydWa#list",
+  "12": "https://drive.google.com/embeddedfolderview?id=1cjVVcpOefx7jlzZiZ7qxkHBjmS11qYEg#list",
 }
