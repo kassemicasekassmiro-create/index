@@ -8,9 +8,10 @@ import { BookOpen, FileText, FolderOpen, Users, Bell, BellRing } from "lucide-re
 
 interface DashboardSectionProps {
   userData: { email: string; profileImage: string; isAdmin: boolean }
+  onSectionChange?: (section: string) => void // adicionando prop para mudança de seção
 }
 
-export default function DashboardSection({ userData }: DashboardSectionProps) {
+export default function DashboardSection({ userData, onSectionChange }: DashboardSectionProps) {
   const [vitrineAlert, setVitrineAlert] = useState(false)
 
   useEffect(() => {
@@ -31,7 +32,19 @@ export default function DashboardSection({ userData }: DashboardSectionProps) {
       <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 flex flex-col sm:flex-row sm:items-center gap-2">
-            <span>Bem-vindo, {userData.email.split("@")[0]}!</span>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => onSectionChange?.("perfil")}
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-gray-200 flex-shrink-0 hover:border-blue-400 transition-colors cursor-pointer"
+              >
+                <img
+                  src={userData.profileImage || "/generic-user-avatar.png"}
+                  alt="Foto de perfil"
+                  className="w-full h-full object-cover"
+                />
+              </button>
+              <span>Bem-vindo, {userData.email.split("@")[0]}!</span>
+            </div>
             {userData.isAdmin && <Badge variant="destructive">Administrador</Badge>}
           </h2>
           <p className="text-sm sm:text-base text-gray-600">Acesse os recursos educacionais da nossa escola virtual</p>

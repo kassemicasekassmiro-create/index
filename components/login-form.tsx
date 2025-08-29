@@ -80,12 +80,13 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
       if (username && password) {
         const { valid, userData } = verifyCredentials(username, password)
         if (valid) {
-          // Salvar dados do usuário atual no localStorage
           localStorage.setItem("schoolUserData", JSON.stringify(userData))
           onLogin(userData)
         } else {
           alert("Nome de usuário ou senha incorretos!")
         }
+      } else {
+        alert("Por favor, preencha todos os campos!")
       }
     } else {
       if (username && email && password && confirmPassword) {
@@ -95,17 +96,23 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
         }
 
         if (checkUserExists(username)) {
-          alert("Este nome de usuário já existe!")
+          alert("Este nome de usuário já existe! Escolha outro nome de usuário.")
           return
         }
 
         const isAdmin = username === "administradorstarlink1@esgl"
         const finalProfileImage = profileImage || "/generic-user-avatar.png"
-        saveUser(username, email, password, finalProfileImage, isAdmin)
 
-        const userData = { username, email, profileImage: finalProfileImage, isAdmin }
-        localStorage.setItem("schoolUserData", JSON.stringify(userData))
-        onLogin(userData)
+        try {
+          saveUser(username, email, password, finalProfileImage, isAdmin)
+          const userData = { username, email, profileImage: finalProfileImage, isAdmin }
+          localStorage.setItem("schoolUserData", JSON.stringify(userData))
+          onLogin(userData)
+        } catch (error) {
+          alert("Erro ao criar conta. Tente novamente.")
+        }
+      } else {
+        alert("Por favor, preencha todos os campos obrigatórios!")
       }
     }
   }

@@ -67,7 +67,7 @@ export default function Home() {
 
     switch (currentSection) {
       case "dashboard":
-        return <DashboardSection userData={userData} />
+        return <DashboardSection userData={userData} onSectionChange={setCurrentSection} /> // passando função de mudança de seção
       case "vitrine":
         return <VitrineSection />
       case "livros":
@@ -77,7 +77,7 @@ export default function Home() {
       case "perfil":
         return <ProfileSection userData={userData} onUpdateProfile={handleUpdateProfile} />
       default:
-        return <DashboardSection userData={userData} />
+        return <DashboardSection userData={userData} onSectionChange={setCurrentSection} /> // passando função de mudança de seção
     }
   }
 
